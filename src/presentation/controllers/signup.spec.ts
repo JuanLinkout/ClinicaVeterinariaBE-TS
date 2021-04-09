@@ -1,3 +1,4 @@
+import { MissingParamError } from './../errors/MissingParamError';
 import { InvalidParamError } from './../errors/invalidParamError';
 import { badRequest } from './../helpers/http-helpers';
 import { HttpRequest, HttpResponse } from './../protocols/http';
@@ -17,7 +18,7 @@ describe("Signup Contoller", () => {
         }
 
         const httpResponse = await sut.handle(httpRequest)
-        expect(httpResponse).toEqual(badRequest(new Error()))
+        expect(httpResponse).toEqual(badRequest(new MissingParamError('name')))
     })
 
     it("Should return 400 if no email is provided", async () => {
@@ -33,7 +34,7 @@ describe("Signup Contoller", () => {
         }
 
         const httpResponse = await sut.handle(httpRequest)
-        expect(httpResponse).toEqual(badRequest(new Error()))
+        expect(httpResponse).toEqual(badRequest(new MissingParamError('email')))
     })
 
     it("Should return 400 if no password is provided", async () => {
@@ -49,7 +50,7 @@ describe("Signup Contoller", () => {
         }
 
         const httpResponse = await sut.handle(httpRequest)
-        expect(httpResponse).toEqual(badRequest(new Error()))
+        expect(httpResponse).toEqual(badRequest(new MissingParamError('password')))
     })
 
     it("Should return 400 if no passwordConfirmation is provided", async () => {
@@ -65,7 +66,7 @@ describe("Signup Contoller", () => {
         }
 
         const httpResponse = await sut.handle(httpRequest)
-        expect(httpResponse).toEqual(badRequest(new Error()))
+        expect(httpResponse).toEqual(badRequest(new MissingParamError('passwordConfirmation')))
     })
 
     it("Should return custom error if param is invalid", async () => {

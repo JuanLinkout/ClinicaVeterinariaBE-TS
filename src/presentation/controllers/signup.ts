@@ -1,3 +1,4 @@
+import { MissingParamError } from './../errors/MissingParamError';
 import { InvalidParamError } from './../errors/invalidParamError';
 import { badRequest } from './../helpers/http-helpers';
 import { HttpRequest, HttpResponse } from './../protocols/http';
@@ -10,7 +11,7 @@ export class SignupController implements Controller {
 
         for (let param of requiredParams) {
             if (!httpRequest.body[param]) {
-                return badRequest(new Error())
+                return badRequest(new MissingParamError(param))
             }
         }
 
