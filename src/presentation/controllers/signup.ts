@@ -4,7 +4,7 @@ import { Controller } from './../protocols/controller';
 
 export class SignupController implements Controller {
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-        const requiredParams = ['name', 'email']
+        const requiredParams = ['name', 'email', 'password']
 
         for (let param of requiredParams) {
             if (!httpRequest.body[param]) {
