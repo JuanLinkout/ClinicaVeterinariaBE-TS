@@ -34,4 +34,20 @@ describe("Signup Contoller", () => {
         const httpResponse = await sut.handle(httpRequest)
         expect(httpResponse).toEqual(badRequest(new Error()))
     })
+
+    it("Should return 400 if no password is provided", async () => {
+        const sut = new SignupController();
+
+        const httpRequest = {
+            body: {
+                name: 'anyname',
+                email: '',
+                password: 'anypassword',
+                passwordConfirmation: 'anypassword'
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse).toEqual(badRequest(new Error()))
+    })
 })
