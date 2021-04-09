@@ -41,9 +41,25 @@ describe("Signup Contoller", () => {
         const httpRequest = {
             body: {
                 name: 'anyname',
-                email: '',
-                password: 'anypassword',
+                email: 'anyemail@gmail.com',
+                password: '',
                 passwordConfirmation: 'anypassword'
+            }
+        }
+
+        const httpResponse = await sut.handle(httpRequest)
+        expect(httpResponse).toEqual(badRequest(new Error()))
+    })
+
+    it("Should return 400 if no passwordConfirmation is provided", async () => {
+        const sut = new SignupController();
+
+        const httpRequest = {
+            body: {
+                name: 'anyname',
+                email: 'anyemail@gmail.com',
+                password: 'anypassword',
+                passwordConfirmation: ''
             }
         }
 
